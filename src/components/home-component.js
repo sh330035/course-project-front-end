@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomeComponet = () => {
+const HomeComponent = () => {
   return (
     <main>
       <div class="container py-4">
@@ -50,11 +50,11 @@ const HomeComponet = () => {
         </div>
 
         <footer class="pt-3 mt-4 text-muted border-top">
-          &copy; 2021 Wilson Ren
+          &copy; 2021 David Hsieh
         </footer>
       </div>
     </main>
   );
 };
 
-export default HomeComponet;
+export default HomeComponent;
