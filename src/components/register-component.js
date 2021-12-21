@@ -49,9 +49,9 @@ const RegisterComponent = () => {
             name="username"
           />
         </div>
-        {/* <br /> */}
+        <br />
         <div className="form-group">
-          <label htmlFor="email">email</label>
+          <label htmlFor="email">Email</label>
           <input
             onChange={handleChangeEmail}
             type="text"
@@ -71,13 +71,23 @@ const RegisterComponent = () => {
         </div>
         <br />
         <div className="form-group">
-          <label htmlFor="password">role</label>
-          <input
+          <label htmlFor="password">Role</label>
+          {/* <input
             onChange={handleChangeRole}
             type="text"
             className="form-control"
             name="role"
-          />
+          /> */}
+          <select
+            name="role"
+            onChange={handleChangeRole}
+            className="form-control"
+            id=""
+          >
+            <option value="">你的身份</option>
+            <option value="student">學生</option>
+            <option value="instructor">教師</option>
+          </select>
         </div>
         <br />
         <button onClick={handleRegister} className="btn btn-primary">

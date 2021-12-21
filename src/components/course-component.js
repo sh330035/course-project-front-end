@@ -16,6 +16,7 @@ const CourseComponent = (props) => {
       _id = currentUser.user._id;
     } else {
       _id = "";
+      return;
     }
 
     if (currentUser.user.role == "instructor") {
