@@ -24,6 +24,7 @@ function App() {
           <RegisterComponent />
         </Route>
         <Route path="/login" exact>
+          {/* 登入時執行 setCurrentUser */}
           <LoginComponent
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
