@@ -22,7 +22,6 @@ const CourseComponent = (props) => {
     if (currentUser.user.role == "instructor") {
       CourseService.get(_id)
         .then((data) => {
-          console.log(data);
           setCourseData(data.data);
         })
         .catch((err) => {
@@ -31,7 +30,6 @@ const CourseComponent = (props) => {
     } else if (currentUser.user.role == "student") {
       CourseService.getEnrolledCourses(_id)
         .then((data) => {
-          console.log(data);
           setCourseData(data.data);
         })
         .catch((error) => {
@@ -66,17 +64,22 @@ const CourseComponent = (props) => {
       {currentUser && courseData && courseData.length != 0 && (
         <div>
           <p>Here's the data we got back from server.</p>
-          {courseData.map((course) => (
-            <div className="card" style={{ width: "18rem" }}>
-              <div className="card-body">
-                <h5 className="card-title">{course.title}</h5>
-                <p className="card-text">{course.description}</p>
-                <p>Student Count: {course.students.length}</p>
-                <button className="btn btn-primary">{course.price}</button>
-                <br />
+          <div className="card-container d-flex">
+            {courseData.map((course) => (
+              <div
+                className="card"
+                style={{ width: "18rem", marginRight: "1.0rem" }}
+              >
+                <div className="card-body">
+                  <h5 className="card-title">{course.title}</h5>
+                  <p className="card-text">{course.description}</p>
+                  <p>Student Count: {course.students.length}</p>
+                  <button className="btn btn-primary">$ {course.price}</button>
+                  <br />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>
