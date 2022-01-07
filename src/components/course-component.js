@@ -10,7 +10,12 @@ const CourseComponent = (props) => {
   };
   let [courseData, setCourseData] = useState(null);
 
-  const handleDeleteCoures = (e) => {
+  const directRouterToEdit = (e) => {
+    const routerId = e.target.id;
+    history.push(`/editCourse/${routerId}`);
+  };
+
+  const handleDeleteCourse = (e) => {
     CourseService.delete(e.target.id)
       .then(() => {
         window.alert("Course has been deleted.");
@@ -117,9 +122,15 @@ const CourseComponent = (props) => {
                       <button className="btn btn-primary">
                         $ {course.price}
                       </button>
-                      <button className="btn btn-success ml-2">修改</button>
                       <button
-                        onClick={handleDeleteCoures}
+                        onClick={directRouterToEdit}
+                        className="btn btn-success ml-2"
+                        id={course._id}
+                      >
+                        修改
+                      </button>
+                      <button
+                        onClick={handleDeleteCourse}
                         id={course._id}
                         className="btn btn-danger ml-2"
                       >

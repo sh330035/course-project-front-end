@@ -21,6 +21,25 @@ class CourseService {
     );
   }
 
+  patch(_id, title, description, price) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    return axios.patch(
+      API_URL + "/" + _id,
+      { title, description, price },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+  }
+
   delete(_id) {
     let token;
     if (localStorage.getItem("user")) {
@@ -30,6 +49,20 @@ class CourseService {
     }
 
     return axios.delete(API_URL + "/" + _id, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  }
+
+  getCourse(_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    return axios.get(API_URL + "/" + _id, {
       headers: {
         Authorization: token,
       },
