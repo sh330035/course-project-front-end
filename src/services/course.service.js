@@ -98,6 +98,24 @@ class CourseService {
       }
     );
   }
+
+  dropCourse(_id, user_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+    return axios.post(
+      API_URL + "/enroll/drop/" + _id,
+      { user_id },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+  }
 }
 
 export default new CourseService();

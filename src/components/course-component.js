@@ -21,6 +21,18 @@ const CourseComponent = (props) => {
     setCourseData(courseData.filter((course) => course._id != e.target.id));
   };
 
+  const handleDropCourse = (e) => {
+    console.log(currentUser.user._id);
+    CourseService.dropCourse(e.target.id, currentUser.user._id)
+      .then(() => {
+        window.alert("Course has been dropped.");
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    setCourseData(courseData.filter((course) => course._id != e.target.id));
+  };
+
   useEffect(() => {
     let _id;
     if (currentUser) {
@@ -91,7 +103,13 @@ const CourseComponent = (props) => {
                       <button className="btn btn-primary">
                         $ {course.price}
                       </button>
-                      <button className="btn btn-danger ml-2">退選</button>
+                      <button
+                        onClick={handleDropCourse}
+                        id={course._id}
+                        className="btn btn-danger ml-2"
+                      >
+                        退選
+                      </button>
                     </div>
                   )}
                   {currentUser.user.role == "instructor" && (
