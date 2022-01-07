@@ -21,6 +21,21 @@ class CourseService {
     );
   }
 
+  delete(_id) {
+    let token;
+    if (localStorage.getItem("user")) {
+      token = JSON.parse(localStorage.getItem("user")).token;
+    } else {
+      token = "";
+    }
+
+    return axios.delete(API_URL + "/" + _id, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  }
+
   getEnrolledCourses(_id) {
     let token;
     if (localStorage.getItem("user")) {

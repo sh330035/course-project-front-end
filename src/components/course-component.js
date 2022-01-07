@@ -9,8 +9,19 @@ const CourseComponent = (props) => {
     history.push("/login");
   };
   let [courseData, setCourseData] = useState(null);
+
+  const handleDeleteCoures = (e) => {
+    CourseService.delete(e.target.id)
+      .then(() => {
+        window.alert("Course has been deleted.");
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    setCourseData(courseData.filter((course) => course._id != e.target.id));
+  };
+
   useEffect(() => {
-    console.log("Using effect.");
     let _id;
     if (currentUser) {
       _id = currentUser.user._id;
@@ -74,7 +85,30 @@ const CourseComponent = (props) => {
                   <h5 className="card-title">{course.title}</h5>
                   <p className="card-text">{course.description}</p>
                   <p>Student Count: {course.students.length}</p>
-                  <button className="btn btn-primary">$ {course.price}</button>
+
+                  {currentUser.user.role == "student" && (
+                    <div>
+                      <button className="btn btn-primary">
+                        $ {course.price}
+                      </button>
+                      <button className="btn btn-danger ml-2">退選</button>
+                    </div>
+                  )}
+                  {currentUser.user.role == "instructor" && (
+                    <div>
+                      <button className="btn btn-primary">
+                        $ {course.price}
+                      </button>
+                      <button className="btn btn-success ml-2">修改</button>
+                      <button
+                        onClick={handleDeleteCoures}
+                        id={course._id}
+                        className="btn btn-danger ml-2"
+                      >
+                        刪除課程
+                      </button>
+                    </div>
+                  )}
                   <br />
                 </div>
               </div>
